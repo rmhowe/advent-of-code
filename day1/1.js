@@ -7,15 +7,12 @@ fs.readFile(fileName, (err, data) => {
 });
 
 function getFloor(directions) {
-  let currentFloor = 0;
-
-  directions.split('').forEach((floor) => {
+  return directions.split('').reduce((previousFloor, floor) => {
     if (floor === '(') {
-      currentFloor++;
+      return previousFloor + 1;
     } else if (floor === ')') {
-      currentFloor--;
+      return previousFloor - 1;
     }
-  });
-
-  return currentFloor;
+    return previousFloor;
+  }, 0);
 }
