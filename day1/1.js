@@ -7,10 +7,10 @@ fs.readFile(fileName, (err, data) => {
 });
 
 function getFloor(directions) {
-  return directions.split('').reduce((previousFloor, floor) => {
-    if (floor === '(') {
+  return directions.split('').reduce((previousFloor, direction) => {
+    if (direction === '(') {
       return previousFloor + 1;
-    } else if (floor === ')') {
+    } else if (direction === ')') {
       return previousFloor - 1;
     }
     return previousFloor;
