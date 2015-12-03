@@ -7,7 +7,7 @@
 
 import sys
 
-def get_houses_delivered(delivery_file):
+def get_presents_delivered(delivery_file):
     x = 0
     y = 0
     presents_delivered = {}
@@ -35,5 +35,5 @@ if len(sys.argv) > 1:
 else:
     file_name = 'input.txt'
 delivery_file = open(file_name, 'r')
-print len(get_houses_delivered(delivery_file).keys())
+print len(get_presents_delivered(delivery_file).keys())
 delivery_file.close()
