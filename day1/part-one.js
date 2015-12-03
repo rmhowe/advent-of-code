@@ -1,3 +1,8 @@
+/*
+ * Learning about typical node constructs, using fs, using the process
+ * object. Everything else is just standard javascript.
+ */
+
 'use strict';
 const fs = require('fs');
 
