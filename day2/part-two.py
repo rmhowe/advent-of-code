@@ -1,8 +1,8 @@
 #
 # Not much new learned on top of part-one. Naming things is important and hard!
-# 
+#
 
-import fileinput
+import sys
 
 def get_total_ribbon(dimensions_file):
     total_ribbon = 0
@@ -17,4 +17,10 @@ def get_ribbon(l, w, h):
     cubic_volume = l * w * h
     return smallest_perimeter + cubic_volume
 
-print get_total_ribbon(fileinput.input())
+if len(sys.argv) > 1:
+    file_name = sys.argv[1]
+else:
+    file_name = 'input.txt'
+dimensions_file = open(file_name, 'r')
+print get_total_ribbon(dimensions_file)
+dimensions_file.close()
