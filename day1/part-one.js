@@ -12,7 +12,8 @@ fs.readFile(fileName, (err, data) => {
 });
 
 function getFloor(directions) {
-  return directions.split('').reduce((previousFloor, direction) => {
+  let directionsArray = directions.split('');
+  let finalFloor = directionsArray.reduce((previousFloor, direction) => {
     if (direction === '(') {
       return previousFloor + 1;
     } else if (direction === ')') {
@@ -20,4 +21,6 @@ function getFloor(directions) {
     }
     return previousFloor;
   }, 0);
+
+  return finalFloor;
 }
