@@ -20,7 +20,8 @@ def get_final_lights_array(width, height, lights_file):
     lights = generate_lights_array(width, height);
     for line in lights_file:
         instruction = line.strip()
-        process_instruction(instruction, lights)
+        (start_coords, end_coords) = get_instruction_coords(instruction)
+        execute_instruction(instruction, start_coords, end_coords, lights)
 
     return lights
 
@@ -32,9 +33,15 @@ def generate_lights_array(width, height):
 
     return lights
 
-def process_instruction(instruction, lights):
-    (start_coords, end_coords) = get_instruction_coords(instruction)
+def get_instruction_coords(instruction):
+    coord_matches = re.search("([0-9]+),([0-9]+)\s*through\s*([0-9]+),([0-9]+)", instruction)
+    x1 = int(coord_matches.group(1))
+    y1 = int(coord_matches.group(2))
+    x2 = int(coord_matches.group(3))
+    y2 = int(coord_matches.group(4))
+    return ((x1, y1), (x2, y2))
 
+def execute_instruction(instruction, start_coords, end_coords, lights):
     if re.search("^turn\s*on", instruction):
         brightness_change = 1
     elif re.search("^turn\s*off", instruction):
@@ -48,14 +55,6 @@ def process_instruction(instruction, lights):
                 lights[x][y] = max(lights[x][y] + brightness_change, 0)
             else:
                 lights[x][y] += brightness_change
-
-def get_instruction_coords(instruction):
-    coord_matches = re.search("([0-9]+),([0-9]+)\s*through\s*([0-9]+),([0-9]+)", instruction)
-    x1 = int(coord_matches.group(1))
-    y1 = int(coord_matches.group(2))
-    x2 = int(coord_matches.group(3))
-    y2 = int(coord_matches.group(4))
-    return ((x1, y1), (x2, y2))
 
 def main():
     if len(sys.argv) > 1:
