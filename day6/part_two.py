@@ -51,10 +51,7 @@ def execute_instruction(instruction, start_coords, end_coords, lights):
 
     for x in xrange(start_coords[0], end_coords[0] + 1):
         for y in xrange(start_coords[1], end_coords[1] + 1):
-            if brightness_change < 0:
-                lights[x][y] = max(lights[x][y] + brightness_change, 0)
-            else:
-                lights[x][y] += brightness_change
+            lights[x][y] = max(lights[x][y] + brightness_change, 0)
 
 def main():
     if len(sys.argv) > 1:
