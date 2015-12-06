@@ -27,17 +27,20 @@ def get_final_lights_array(width, height, lights_file):
     return lights
 
 def generate_lights_array(width, height):
-    row = [False for i in xrange(0, height)]
-    lights = [row for i in xrange(0, width)]
+    lights = []
+    for i in xrange(0, width):
+        row = [False for i in xrange(0, height)]
+        lights.append(row)
+
     return lights
 
 def process_instruction(instruction, lights):
     (start_coords, end_coords) = get_instruction_coords(instruction)
 
     toggle = False
-    if re.search("^turn on", instruction):
+    if re.search("^turn\s*on", instruction):
         new_value = True
-    elif re.search("^turn off", instruction):
+    elif re.search("^turn\s*off", instruction):
         new_value = False
     elif re.search("^toggle", instruction):
         toggle = True
