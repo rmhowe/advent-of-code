@@ -1,22 +1,15 @@
 #
-# My wonderful O(n!) solution to the travelling salesman problem. It's ok given
-# the input size, and pretty sure most of the faster algorithms only give
-# estimates, not necessarily the shortest/longest path. Besides, don't optimise
-# until you run into performance issues!
-#
-# Learnt about itertools in python, so freaking cool, can really see how python
-# is great for scientific programming. Also learnt about float("inf") for
-# infinity. Apart from that pretty standard.
+# Same as part one
 #
 
 import sys
 import re
 import itertools
 
-def get_shortest_path_distance(distance_file):
+def get_longest_path_distance(distance_file):
     distances = get_all_distances(distance_file)
-    shortest_distance = get_shortest_distance(distances)
-    return shortest_distance
+    longest_distance = get_longest_distance(distances)
+    return longest_distance
 
 def get_all_distances(distance_file):
     distances = {}
@@ -37,9 +30,9 @@ def get_all_distances(distance_file):
 
     return distances
 
-def get_shortest_distance(distances):
+def get_longest_distance(distances):
     cities = distances.keys()
-    shortest_distance = float("inf")
+    longest_distance = 0
     for path in itertools.permutations(cities):
         total_distance = 0
         for index, city in enumerate(path):
@@ -47,10 +40,10 @@ def get_shortest_distance(distances):
                 break
             total_distance += distances[path[index]][path[index+1]]
 
-        if total_distance < shortest_distance:
-            shortest_distance = total_distance
+        if total_distance > longest_distance:
+            longest_distance = total_distance
 
-    return shortest_distance
+    return longest_distance
 
 def main():
     if len(sys.argv) > 1:
@@ -58,7 +51,7 @@ def main():
     else:
         file_name = "input.txt"
     distance_file = open(file_name, "r")
-    print get_shortest_path_distance(distance_file)
+    print get_longest_path_distance(distance_file)
     distance_file.close()
 
 if __name__ == "__main__":
